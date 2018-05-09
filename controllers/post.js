@@ -20,6 +20,18 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/recent', (req, res) => {
+    Post.find({}, (err, posts) => {
+      if(err){
+        console.log(err);
+        res.json({error: "error"})
+      }else{
+        console.log(posts);
+        res.json({posts: posts, success: "Found all posts"})
+      }
+    }).limit(8)
+});
+
 router.post('/', (req, res) => {
     if(req.session.currentUser){
       req.body.user_id = req.session.currentUser;

@@ -13,7 +13,6 @@ nav{
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-
 }
 nav .nav-item{
   padding-right: 8px;
@@ -78,8 +77,8 @@ nav .nav-item .btn{
   padding-right: 5px;
 }
 .left-col{
-  background: #FDFEFE;
-  border-right:2px solid lightgrey;
+  background: #F5F9FB;
+  border-right:1px solid lightgrey;
 }
 .right-col{
   background: white;
@@ -90,6 +89,15 @@ nav .nav-item .btn{
 .inner{
   padding-top: 100px;
 }
+#services .card:hover{
+   cursor: pointer;
+   border: 1px solid #D85450;
+}
+.dashboard-categories .card:hover{
+   cursor: pointer;
+   border: 1px solid #D85450;
+}
+
 #people{
   width: 25%;
 }
@@ -102,11 +110,14 @@ nav .nav-item .btn{
 #dashboard{
   position: absolute;
   top:0;
-  background-color: #F5F9FB;
+  background-color: #e3e9ed;
   width: 100%;
 }
 #datebox2{
   margin-left: 15px;
+}
+.sum h4{
+  padding: 15px;
 }
 .modal-header{
   background-color:#F8F9FA;
@@ -120,11 +131,23 @@ nav .nav-item .btn{
 .disabled{
   cursor:default!important;
 }
-
+.fa-bullhorn{
+  font-size: 120px;
+}
 .alert-secondary{
   background-color: #F5F9FB!important;
 }
-
+.bg-lightdark{
+  background-color: #212428;
+  bottom: 10;
+  position: absolute;
+  z-index: 1000;
+  padding: 20px;
+}
+.social .fab{
+  margin:0px 10px 0px 10px;
+  font-size: 20px;
+}
 a{
   cursor: pointer;
 }

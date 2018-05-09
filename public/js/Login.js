@@ -30,7 +30,7 @@ class Login extends React.Component{
           <div class="modal-content">
             <div class="modal-header">
               <h3 class="modal-title" id="loginModal">Login</h3>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.props.resetErrors}>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>

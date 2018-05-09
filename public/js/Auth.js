@@ -7,6 +7,7 @@ class Auth extends React.Component{
     }
       this.signUp = this.signUp.bind(this)
       this.logIn = this.logIn.bind(this)
+      this.resetErrors = this.resetErrors.bind(this)
   }
 
   logIn(user){
@@ -65,11 +66,17 @@ class Auth extends React.Component{
     }).catch(error => console.log(error))
    }
 
+  resetErrors(){
+    this.setState({
+      error: null,
+    });
+  }
+
   render(){
     return(
       <section>
-        <Signup signUp={this.signUp} error={this.state.error} />
-        <Login logIn={this.logIn} success={this.state.success} error={this.state.error}/>
+        <Signup resetErrors={this.resetErrors} signUp={this.signUp} error={this.state.error} />
+        <Login  resetErrors={this.resetErrors} logIn={this.logIn} success={this.state.success} error={this.state.error}/>
       </section>
     )
   }

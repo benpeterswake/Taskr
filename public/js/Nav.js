@@ -51,6 +51,7 @@ class Nav extends React.Component{
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item">Dashboard</a>
                       <a class="dropdown-item">My Tasks</a>
+                      <a class="dropdown-item">My Work</a>
                       <a class="dropdown-item">Notifications</a>
                       <a class="dropdown-item">Browse Tasks</a>
                       <a class="dropdown-item"><button class="btn btn-danger btn-block" onClick={this.props.logOut}>Logout</button></a>

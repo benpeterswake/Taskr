@@ -2,6 +2,7 @@ class Recent extends React.Component{
   constructor(props){
     super(props)
   }
+
   render(){
     return(
       <section id="services">
@@ -9,12 +10,22 @@ class Recent extends React.Component{
           <div class="row">
             <div class="col-sm-12">
               <h4 class="mt-5 text-center text-muted">Recently posted tasks</h4>
-                <div class="row mt-5">
-                  <div class="col-lg-3">
-                    <div class="card">
-                      <p class="text-muted">Date</p>
-                    </div>
-                  </div>
+                <div class="row">
+                {
+                  this.props.state.posts.slice(0, 8).map((post, index) => {
+                    return (
+                      <div class="col-lg-3 mt-5">
+                        <div class="card">
+                           <div class="card-body">
+                             <p class="text-muted">{post.createdAt.split('T')[0]}</p>
+                             <h5 class="card-title"><small>{post.title}</small></h5>
+                             <p class="card-text">Location: {post.location}</p>
+                           </div>
+                        </div>
+                      </div>
+                    )
+                  })
+                }
                 </div>
                 <div class="row mt-5">
                   <div class="col-lg-12 text-center">

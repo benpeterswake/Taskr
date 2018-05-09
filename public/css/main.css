@@ -1,0 +1,156 @@
+body {
+  padding-top: 54px;
+  font-family: 'Open Sans', sans-serif;
+}
+nav{
+  border-bottom: 2px solid lightgrey;
+}
+.business-header {
+  height: 65vh;
+  min-height: 300px;
+  background: url('../cleaning1.jpg') center center no-repeat scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+}
+nav .nav-item{
+  padding-right: 8px;
+  font-size: 13px;
+}
+nav .nav-item .btn{
+  font-size: 13px;
+}
+.navbar-brand{
+  font-family: 'Bangers', cursive;
+  font-size: 25px;
+  color: grey!important;
+}
+.align{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vl{
+  border:0.05em solid lightgrey;
+  position: fixed;
+  margin-left: 80px;
+  height:62px;
+}
+.navbar-collapse{
+  padding-left:40px;
+}
+.small{
+  font-size: 13px;
+}
+.bg-lighter{
+  background-color: #F5F9FB;
+  border-top: 1px solid lightgrey;
+}
+.bg-red{
+  background-color: #D85450;
+  color:white;
+}
+
+.form-group{
+  text-align: left!important;
+}
+.click{
+  cursor: pointer;
+}
+.fa-chart-pie{
+  font-size:26em;
+}
+.fa-check-circle{
+  font-size:4em;
+  margin-top: 21px;
+}
+.fa-user-circle{
+  font-size:7.5em;
+  margin-bottom: 10px;
+  color:#D85450;
+}
+.fa-thumbs-up{
+ font-size:5em;
+}
+.fa-user{
+  padding-right: 5px;
+}
+.left-col{
+  background: #FDFEFE;
+  border-right:2px solid lightgrey;
+}
+.right-col{
+  background: white;
+  text-align: left;
+  height: 100%;
+  overflow: scroll;
+}
+.inner{
+  padding-top: 100px;
+}
+#people{
+  width: 25%;
+}
+.input-group{
+  width: 25%;
+}
+#dashboard .full{
+  height:100vh;
+}
+#dashboard{
+  position: absolute;
+  top:0;
+  background-color: #F5F9FB;
+  width: 100%;
+}
+#datebox2{
+  margin-left: 15px;
+}
+.modal-header{
+  background-color:#F8F9FA;
+}
+.nav-tabs .nav-link{
+  color: #28a745;
+}
+.list-group-item{
+  cursor: pointer;
+}
+.disabled{
+  cursor:default!important;
+}
+
+.alert-secondary{
+  background-color: #F5F9FB!important;
+}
+
+a{
+  cursor: pointer;
+}
+footer li{
+  list-style: none;
+  line-height: 30px;
+  color:#9FBCB6;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+@media (max-width: 992px) {
+  .fix{
+    margin-top:0px;
+  }
+  .navbar-collapse{
+    padding-left:0px;
+  }
+  .vl{
+    border:0.05em solid lightgrey;
+    position: fixed;
+    margin-left: 80px;
+    height:62px;
+    visibility: hidden;
+  }
+}

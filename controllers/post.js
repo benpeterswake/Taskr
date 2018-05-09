@@ -20,6 +20,24 @@ router.get('/', (req, res) => {
     }
 });
 
+router.put('/', (req, res) => {
+  if(req.session.currentUser){
+    Post.findByIdAndUpdate(req.body.id, req.body, {new:true}, (err, updatedPost) => {
+      if(err){
+        console.log(err);
+        res.json({error: "error"})
+      }else{
+        console.log(updatedPost);
+        res.json({post: updatedPost, success: "Updated post"})
+      }
+    })
+  }else{
+    res.json({
+      auth: 'logged out'
+    })
+  }
+})
+
 router.get('/recent', (req, res) => {
     Post.find({}, (err, posts) => {
       if(err){
@@ -29,7 +47,7 @@ router.get('/recent', (req, res) => {
         console.log(posts);
         res.json({posts: posts, success: "Found all posts"})
       }
-    }).limit(8)
+    }).limit(8).sort('-createdAt')
 });
 
 router.post('/', (req, res) => {

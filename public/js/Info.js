@@ -3,7 +3,7 @@ class Info extends React.Component{
     return     <section class="py-5 bg-red">
           <div class="container py-4">
             <div class="row mt-3 small">
-              <div class="col-lg-5 mt-3 text-center">
+              <div class="col-lg-5 mt-2 text-center">
                 <i class="fas fa-chart-pie"></i>
               </div>
               <div class="col-lg-6">

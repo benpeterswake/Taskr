@@ -1,3 +1,85 @@
+class EditForm extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      id: '',
+      title: '',
+      description: '',
+      location: '',
+      budget: '',
+      date: '',
+      people: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount(){
+    this.setState({
+      id: this.props.state.post._id,
+      title: this.props.state.post.title,
+      description: this.props.state.post.description,
+      location: this.props.state.post.location,
+      budget: this.props.state.post.budget,
+      date: this.props.state.post.date,
+      people: this.props.state.post.people
+    })
+  }
+
+  handleChange(event){
+    this.setState({
+      [event.target.id]: event.target.value,
+    })
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    console.log(this.state);
+    this.props.editPost(this.state)
+    this.props.toggleEdit(null, {})
+  }
+
+  render(){
+    return(
+      <form onSubmit={this.handleSubmit}>
+        <div class="card text-white bg-secondary mt-4">
+         <div class="card-header">
+         <label>Title:</label>
+          <input id="title" type="text" onChange={this.handleChange} value={this.state.title}/>
+          <span class="badge badge-success float-right">{this.props.state.post.completed?'Completed':'Active'}</span>
+         </div>
+          <div class="card-body">
+            <p class="card-text">
+              <label>Budget: ${this.props.state.post.hourly?'/hr':null}</label>
+              <input id="budget" type="number" onChange={this.handleChange} value={this.state.budget} />
+            </p>
+            <p class="card-text">
+              <label>People:</label>
+              <input id="people" type="number" min="1" onChange={this.handleChange} value={this.state.people} />
+            </p>
+            <p class="card-text">
+              <label>Due Date:</label>
+              <input id="date" type="date" onChange={this.handleChange} value={this.state.date}/>
+            </p>
+            <p class="card-text">
+              <label>Location:</label>
+              <input id="location" type="text" onChange={this.handleChange} value={this.state.location}/>
+            </p>
+            <p class="card-text">
+              <label>Description:</label><br/>
+              <textarea id="description" cols="50" rows="6" onChange={this.handleChange} value={this.state.description}></textarea>
+            </p>
+          </div>
+          <div class="card-footer bg-dark">
+            <button type="submit" class="card-link btn btn-success">Save Task</button>
+            <a href="#" class="card-link text-danger">Delete Task</a>
+          </div>
+        </div>
+      </form>
+    )
+  }
+}
+
 class MyTasks extends React.Component{
   constructor(props){
     super(props)
@@ -5,7 +87,7 @@ class MyTasks extends React.Component{
   render(){
     return(
       <div class="inner">
-        <h5 class="text-gery">My Tasks <small>(Tasks you posted)</small></h5>
+        <h5 class="text-gery">My Tasks</h5>
         <hr/>
         <div class="container mb-5">
               {
@@ -24,6 +106,7 @@ class MyTasks extends React.Component{
                           <p class="card-text">Budget: ${post.budget} {post.hourly?'/hr':null}</p>
                           <p class="card-text">Due Date: {post.date}</p>
                           <p class="card-text">Location: {post.location}</p>
+                          <p class="card-text">People: {post.people}</p>
                           <p class="card-text">Offers: {post.offers.length>0? post.offers: 'None'}</p>
                         </div>
                         <div class="card-footer bg-dark">
@@ -33,36 +116,7 @@ class MyTasks extends React.Component{
                         </div>
                       </div>
                       :
-                      <form>
-                        <div class="card text-white bg-secondary mt-4">
-                         <div class="card-header">
-                          <input type="text" value={post.title}/>
-                          <span class="badge badge-success float-right">{post.completed?'Completed':'Active'}</span>
-                         </div>
-                          <div class="card-body">
-                            <p class="card-text">
-                              <label>Budget:</label>
-                              <input type="number" value={post.budget} />
-                            </p>
-                            <p class="card-text">
-                              <label>Due Date:</label>
-                              <input type="date" value={post.date} />
-                            </p>
-                            <p class="card-text">
-                              <label>Location:</label>
-                              <input type="text" value={post.location} />
-                            </p>
-                            <p class="card-text">
-                              <label>Description:</label><br/>
-                              <textarea cols="50" rows="6" value={post.description}></textarea>
-                            </p>
-                          </div>
-                          <div class="card-footer bg-dark">
-                          <a href="#" class="card-link text-success">Save Task</a>
-                          <a href="#" class="card-link text-danger">Delete Task</a>
-                          </div>
-                        </div>
-                      </form>
+                      <EditForm editPost={this.props.editPost} toggleEdit={this.props.toggleEdit} state={this.props.state} />
                      }
                     </div>
                   )

@@ -68,7 +68,7 @@ nav .nav-item .btn{
 .fa-user-circle{
   font-size:7.5em;
   margin-bottom: 10px;
-  color:#D85450;
+  color:#F5C5CA;
 }
 .fa-thumbs-up{
  font-size:5em;
@@ -85,6 +85,9 @@ nav .nav-item .btn{
   text-align: left;
   height: 100%;
   overflow: scroll;
+}
+.bg-lightgrey{
+    background: #F5F9FB;
 }
 .inner{
   padding-top: 100px;

@@ -12,14 +12,14 @@ class Recent extends React.Component{
               <h4 class="mt-5 text-center text-muted">Recently posted tasks</h4>
                 <div class="row">
                 {
-                  this.props.state.posts.slice(0, 8).map((post, index) => {
+                  this.props.state.recentPosts.slice(0, 8).map((post, index) => {
                     return (
                       <div class="col-lg-3 mt-5">
-                        <div class="card">
+                        <div class="card bg-lightgrey">
                            <div class="card-body">
                              <p class="text-muted">{post.createdAt.split('T')[0]}</p>
                              <h5 class="card-title"><small>{post.title}</small></h5>
-                             <p class="card-text">Location: {post.location}</p>
+                             <p class="card-text">{post.location}</p>
                            </div>
                         </div>
                       </div>

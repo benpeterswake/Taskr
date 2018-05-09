@@ -118,7 +118,7 @@ class Dashboard extends React.Component{
                         </div>
                         <h5 class="text-center mt-5">Your Work Summary <br/> <small>(Tasks you offered to complete)</small></h5>
                         <div class="row text-center sum mt-4 mb-5">
-                          <div class="col-lg-4">
+                          <div class="col-lg-3">
                             <div class="card  text-white bg-secondary">
                                 <h4>0</h4>
                                 <div class="card-footer">
@@ -126,20 +126,28 @@ class Dashboard extends React.Component{
                                 </div>
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-3">
                             <div class="card  text-white bg-secondary">
-                                <h4>0</h4>
+                              <h4>0</h4>
                               <div class="card-footer">
                                 Offers Accepted
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-3">
                             <div class="card  text-white bg-secondary">
-                                  <h4>0</h4>
+                                <h4>0</h4>
                                 <div class="card-footer">
-                                  Tasks Completed
+                                  Completed
                                 </div>
+                              </div>
+                            </div>
+                          <div class="col-lg-3">
+                            <div class="card  text-white bg-secondary">
+                                  <h4>$0</h4>
+                                  <div class="card-footer">
+                                    Earnings
+                                  </div>
                               </div>
                             </div>
                         </div>
@@ -150,7 +158,7 @@ class Dashboard extends React.Component{
 
                   {
                   this.props.state.myTasks?
-                    <MyTasks state={this.props.state} toggleEdit={this.props.toggleEdit}/>
+                    <MyTasks state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
                   :
                   null
                   }

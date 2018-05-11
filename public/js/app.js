@@ -12,7 +12,8 @@ class App extends React.Component{
       allPosts: [],
       post: {},
       editPost: null,
-      completedSum: 0
+      completedSum: 0,
+      createSuccess: false
     }
     this.toggleState = this.toggleState.bind(this)
     this.checkSession = this.checkSession.bind(this)
@@ -139,7 +140,13 @@ class App extends React.Component{
       .then(data => {
         if(data.success){
           $('#postModal').modal('hide');
+          this.setState({
+            createSuccess: true
+          })
+          this.toggleState("myTasks", "dashboard");
           this.getPost()
+          $('.list-group-item-danger').removeClass('list-group-item-danger');
+          $('#myTasks').addClass('list-group-item-danger')
         }
     }).catch(error => console.log(error))
   }
@@ -234,20 +241,20 @@ class App extends React.Component{
         {
           this.state.loggedIn ?
           <div>
-            <Nav goToTop={this.goToTop} toggleState={this.toggleState} logOut={this.logOut} name={this.state.name} loggedIn={this.state.loggedIn} />
+            <Nav state={this.state} goToTop={this.goToTop} toggleState={this.toggleState} logOut={this.logOut} name={this.state.name} loggedIn={this.state.loggedIn} />
             <Post name={this.state.name} createPost={this.createPost}/>
             {
               this.state.browseTasks?
               <BrowseTasks state={this.state}/>
               :
-              <Dashboard completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+              <Dashboard toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
             }
 
           </div>
           :
           <div>
-            <Auth checkSession={this.checkSession} />
-            <Nav  goToTop={this.goToTop} toggleState={this.toggleState}/>
+            <Auth toggleState={this.toggleState} checkSession={this.checkSession} />
+            <Nav state={this.state} goToTop={this.goToTop} toggleState={this.toggleState}/>
             {
               this.state.browseTasks?
               <BrowseTasks state={this.state}/>
@@ -259,11 +266,12 @@ class App extends React.Component{
                 <Info />
                 <Recent goToTop={this.goToTop} toggleState={this.toggleState} state={this.state}/>
                 <Data />
+                <CallToAction />
+                <Footer />
               </section>
             }
 
-            <CallToAction />
-            <Footer />
+
           </div>
         }
     </section>

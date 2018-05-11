@@ -38,7 +38,7 @@ class Dashboard extends React.Component{
                         <div class="row text-center mt-3">
                           <div class="col-lg-7">
                           {this.props.state.posts.length <= 0 ? <h5>Post your first task!</h5>:<h5>Post another task!</h5> }
-                          <p>or <a class="text-danger">browse tasks</a>.</p>
+                          <p>or <a class="text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}>browse tasks</a>.</p>
                           </div>
                           <div class="col-lg-5 mt-2" data-toggle="modal" data-target="#postModal">
                              <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#postModal">Post A Task</button>
@@ -162,7 +162,7 @@ class Dashboard extends React.Component{
 
                   {
                   this.props.state.myTasks?
-                    <MyTasks completePost={this.props.completePost} deletePost={this.props.deletePost} state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
+                    <MyTasks toggleState={this.props.toggleState} completePost={this.props.completePost} deletePost={this.props.deletePost} state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
                   :
                   null
                   }

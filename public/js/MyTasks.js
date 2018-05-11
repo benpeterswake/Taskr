@@ -21,6 +21,15 @@ class MyTasks extends React.Component{
         <h5 class="text-gery">My Tasks</h5>
         <hr/>
         <div class="container mb-5">
+             {
+              this.props.state.createSuccess?
+              <div class="alert alert-success" role="alert">
+                Post successfull created!
+                <button type="button" class="close" onClick={() => this.props.toggleState(null,null,"createSuccess")}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>:null
+              }
               {
                 this.props.state.posts.length > 0 ?
                 this.props.state.posts.map((post, index) => {
@@ -34,11 +43,11 @@ class MyTasks extends React.Component{
                         {post.completed?<span class="badge badge-danger float-right">Completed</span>:<span class="badge badge-success float-right">Active</span>}
                        </div>
                         <div class="card-body">
-                          <p class="card-text">Budget: ${post.budget} {post.hourly?'/hr':null}</p>
-                          <p class="card-text">Due Date: {post.date}</p>
-                          <p class="card-text">Location: {post.location}</p>
-                          <p class="card-text">People: {post.people}</p>
+                          <p class="card-text">Posted By: {post.name}</p>
+                          <p class="card-text">Budget: ${post.budget} {post.hourly?'/hr':null} | Due Date: {post.date}</p>
+                          <p class="card-text">Location: {post.location} | People: {post.people}</p>
                           <p class="card-text">Offers: {post.offers.length>0? post.offers: 'None'}</p>
+                          <p class="card-text">Description: {post.description}</p>
                         </div>
                         <div class="card-footer bg-dark">
                         <a href="#" class="card-link" onClick={() => this.props.toggleEdit(index, post)}>Edit Task</a>

@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
           console.log(userPosts);
           res.json({posts: userPosts, success: "Found posts"})
         }
-      })
+      }).sort('-createdAt')
     }else{
       res.json({
         auth: 'logged out'

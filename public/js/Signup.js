@@ -45,35 +45,36 @@ class Signup extends React.Component{
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form onSubmit={this.handleSubmit}>
-            {
-              this.props.error?
-              <div class="alert alert-danger" role="alert">
-                {this.props.error}
-              </div>: null
-            }
-              <div class="modal-body">
-                <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" id="first_name" onChange={this.handleChange} value={this.state.first_name} class="form-control" placeholder="First Name" required />
+              <form onSubmit={this.handleSubmit}>
+              {
+                this.props.error?
+                <div class="alert alert-danger" role="alert">
+                  {this.props.error}
+                </div>: null
+              }
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="first_name" onChange={this.handleChange} value={this.state.first_name} class="form-control" placeholder="First Name" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="last_name" onChange={this.handleChange} value={this.state.last_name} class="form-control"  placeholder="Last Name" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email"  onChange={this.handleChange} value={this.state.email} class="form-control" placeholder="Email"  required />
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" onChange={this.handleChange} value={this.state.password} class="form-control" placeholder="Password" required />
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" id="last_name" onChange={this.handleChange} value={this.state.last_name} class="form-control"  placeholder="Last Name" required />
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger btn-block" >Submit</button>
                 </div>
-                <div class="form-group">
-                  <label>Email address</label>
-                  <input type="email"  onChange={this.handleChange} value={this.state.email} class="form-control" placeholder="Email"  required />
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" onChange={this.handleChange} value={this.state.password} class="form-control" placeholder="Password" required />
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-danger btn-block" >Submit</button>
-              </div>
-          </form>
+            </form>
+            <p class="text-center py-2">Already a user? <a class="text-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#loginModal"> Login!</a></p>
           </div>
         </div>
       </div>

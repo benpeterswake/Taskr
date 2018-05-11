@@ -51,7 +51,6 @@ nav .nav-item .btn{
   background-color: #D85450;
   color:white;
 }
-
 .form-group{
   text-align: left!important;
 }
@@ -59,11 +58,11 @@ nav .nav-item .btn{
   cursor: pointer;
 }
 .fa-chart-pie{
-  font-size:26em;
+  font-size:26.5em;
 }
 .fa-check-circle{
   font-size:4em;
-  margin-top: 21px;
+  margin-top: 25px;
 }
 .fa-user-circle{
   font-size:7.5em;
@@ -86,23 +85,39 @@ nav .nav-item .btn{
   height: 100%;
   overflow: scroll;
 }
+.left-col-browse{
+  background: #F5F9FB;
+  border-right:1px solid lightgrey;
+}
+.right-col-browse{
+  background: white;
+  text-align: left;
+  height: 95%;
+  overflow: scroll;
+}
 .bg-lightgrey{
-    background: #F5F9FB;
+  background: #F5F9FB;
 }
 .inner{
   padding-top: 100px;
 }
 #services .card:hover{
-   cursor: pointer;
-   border: 1px solid #D85450;
+ cursor: pointer;
+ border: 1px solid #D85450;
 }
 .dashboard-categories .card:hover{
-   cursor: pointer;
-   border: 1px solid #D85450;
+ cursor: pointer;
+ border: 1px solid #D85450;
 }
-
+#map{
+  height:100vh;
+  width:100%;
+}
 #people{
   width: 25%;
+}
+.mt-6{
+  margin-top: 60px;
 }
 .input-group{
   width: 25%;
@@ -115,6 +130,17 @@ nav .nav-item .btn{
   top:0;
   background-color: #e3e9ed;
   width: 100%;
+  overflow-y: hidden;
+}
+#browse .full{
+  height:100vh;
+}
+#browse{
+  position: absolute;
+  top:0;
+  background-color: #e3e9ed;
+  width: 100%;
+  overflow-y: hidden;
 }
 #datebox2{
   margin-left: 15px;

@@ -1,6 +1,7 @@
 class Recent extends React.Component{
   constructor(props){
     super(props)
+
   }
 
   render(){
@@ -29,7 +30,7 @@ class Recent extends React.Component{
                 </div>
                 <div class="row mt-5">
                   <div class="col-lg-12 text-center">
-                    <button class="btn btn-outline-secondary">See more tasks</button>
+                    <button class="btn btn-outline-secondary" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}>See more tasks</button>
                   </div>
                 </div>
             </div>

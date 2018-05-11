@@ -6,7 +6,8 @@ const userModel = new Schema({
   password: {type: String, required: true},
   first_name: String,
   last_name: String,
-  offers: [{post_id: String, post_title:String, offer:Number}]
+  offers: [{post_id: String, post_title:String, offer:Number}],
+  accepted:[{post_id: String, post_title:String, offer:Number}]
 })
 
 const User = mongoose.model('User', userModel);

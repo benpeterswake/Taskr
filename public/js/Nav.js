@@ -6,7 +6,7 @@ class Nav extends React.Component{
     return (
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-          <a class="navbar-brand">Taskr</a>
+          <a class="navbar-brand" onClick={() => {this.props.toggleState(null, null, 'browseTasks'); this.props.goToTop()}}>Taskr</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -20,7 +20,7 @@ class Nav extends React.Component{
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#postModal">Post a task</button>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link">Browse Tasks</a>
+                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}>Browse Tasks</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link">My Tasks</a>
@@ -32,7 +32,7 @@ class Nav extends React.Component{
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#loginModal">Post a task</button>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link">Browse Tasks</a>
+                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}>Browse Tasks</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link">How it works</a>

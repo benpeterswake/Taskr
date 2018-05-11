@@ -63,7 +63,7 @@ class Post extends React.Component{
       title: '',
       description: '',
       location: '',
-      date: '',
+      date: this.date,
       total: true,
       hourly: false,
       budget: null,

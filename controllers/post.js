@@ -2,6 +2,18 @@ const express = require('express')
 const router = express.Router();
 const Post = require('../models/post.js');
 
+router.get('/all', (req, res) => {
+      Post.find({}, (err, posts) => {
+        if(err){
+          console.log(err);
+          res.json({error: "error"})
+        }else{
+          console.log(posts);
+          res.json({posts: posts, success: "Found posts"})
+        }
+      })
+});
+
 router.get('/', (req, res) => {
     if(req.session.currentUser){
       Post.find({user_id: req.session.currentUser._id}, (err, userPosts) => {
@@ -19,6 +31,24 @@ router.get('/', (req, res) => {
       })
     }
 });
+
+router.put('/completed', (req, res) => {
+  if(req.session.currentUser){
+    Post.findByIdAndUpdate(req.body._id, req.body, {new:true}, (err, updatedPost) => {
+      if(err){
+        console.log(err);
+        res.json({error: "error"})
+      }else{
+        console.log(updatedPost);
+        res.json({post: updatedPost, success: "Updated post"})
+      }
+    })
+  }else{
+    res.json({
+      auth: 'logged out'
+    })
+  }
+})
 
 router.put('/', (req, res) => {
   if(req.session.currentUser){
@@ -69,6 +99,24 @@ router.post('/', (req, res) => {
       })
     }
 });
+
+router.delete('/:id',(req, res) => {
+  if(req.session.currentUser){
+    Post.findByIdAndRemove(req.params.id, (err, post) => {
+      if(err){
+        console.log(err);
+        res.json({error: "Delete failed!"})
+      }else{
+        console.log(post);
+        res.json({success: "Post deleted!"})
+      }
+    })
+  }else{
+    res.json({
+      auth: 'logged out'
+    })
+  }
+})
 
 
 module.exports = router;

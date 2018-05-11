@@ -81,41 +81,45 @@ class Dashboard extends React.Component{
                               </div>
                             </div>
                         </div>
-                        <h5 class="text-center mt-5">Your Task Summary <br/><small>(Tasks you posted)</small></h5>
-                        <div class="row text-center sum mt-4">
-                          <div class="col-lg-3">
-                            <div class="card text-white bg-success" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
-                                <h4>{this.props.state.posts.length}</h4>
-                                <div class="card-footer">
-                                  Active Posts
-                                </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-3">
-                            <div class="card text-white bg-warning" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
-                                <h4>0</h4>
+
+                      <h5 class="text-center mt-5">Your Task Summary <br/><small>(Tasks you posted)</small></h5>
+                      <div class="row text-center sum mt-4">
+                        <div class="col-lg-3">
+                          <div class="card text-white bg-success" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                              <h4>{this.props.state.posts.length}</h4>
                               <div class="card-footer">
-                                Offers
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-3">
-                            <div class="card text-white bg-primary" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
-                                  <h4>0</h4>
-                                <div class="card-footer">
-                                  Accepted
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-lg-3">
-                              <div class="card text-white bg-info" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
-                                <h4>0</h4>
-                                <div class="card-footer ">
-                                Completed
-                                </div>
+                                Active Posts
                               </div>
                           </div>
                         </div>
+                        <div class="col-lg-3">
+                          <div class="card text-white bg-warning" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                              <h4>0</h4>
+                            <div class="card-footer">
+                              Offers
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="card text-white bg-primary" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                                <h4>0</h4>
+                              <div class="card-footer">
+                                Accepted
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-3">
+                            <div class="card text-white bg-info" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                              <h4>
+                              {this.props.state.completedSum}
+                              </h4>
+                              <div class="card-footer">
+                              Completed
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+
                         <h5 class="text-center mt-5">Your Work Summary <br/> <small>(Tasks you offered to complete)</small></h5>
                         <div class="row text-center sum mt-4 mb-5">
                           <div class="col-lg-3">
@@ -158,7 +162,7 @@ class Dashboard extends React.Component{
 
                   {
                   this.props.state.myTasks?
-                    <MyTasks state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
+                    <MyTasks completePost={this.props.completePost} deletePost={this.props.deletePost} state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
                   :
                   null
                   }

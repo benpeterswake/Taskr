@@ -6,24 +6,32 @@ class App extends React.Component{
       name: '',
       myTasks: false,
       dashboard: true,
+      browseTasks: false,
       posts: [],
       recentPosts:[],
+      allPosts: [],
       post: {},
-      editPost: null
+      editPost: null,
+      completedSum: 0
     }
     this.toggleState = this.toggleState.bind(this)
     this.checkSession = this.checkSession.bind(this)
     this.createPost = this.createPost.bind(this)
     this.getPost = this.getPost.bind(this)
     this.editPost = this.editPost.bind(this)
+    this.completePost = this.completePost.bind(this)
+    this.deletePost = this.deletePost.bind(this)
+    this.getAllPosts = this.getAllPosts.bind(this)
     this.getRecentPosts = this.getRecentPosts.bind(this)
     this.logOut = this.logOut.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
+    this.goToTop = this.goToTop.bind(this)
   }
 
   componentDidMount(){
     this.checkSession()
     this.getRecentPosts()
+    this.getAllPosts()
   }
 
   getRecentPosts(){
@@ -49,9 +57,33 @@ class App extends React.Component{
       .then(data => {
       if(data.success){
         this.setState({
-          posts: data.posts
+          posts: data.posts,
+          completedSum: 0
         })
-        console.log(this.state.posts);
+      }else{
+        console.log('no posts');
+      }
+      for(let i=0; i<this.state.posts.length; i++){
+        if(this.state.posts[i].completed){
+          this.setState({
+            completedSum: this.state.completedSum+=1
+          })
+        }
+      }
+    }).catch(error => console.log(error))
+  }
+
+  getAllPosts(){
+    fetch('/post/all', {
+      credentials: "same-origin"
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+      if(data.success){
+        this.setState({
+          allPosts: data.posts,
+        })
+        console.log(this.state);
       }else{
         console.log('no posts');
       }
@@ -80,6 +112,20 @@ class App extends React.Component{
     }).catch(error => console.log(error))
   }
 
+  deletePost(post){
+    fetch('/post/' + post._id, {
+      credentials: "same-origin",
+      method: 'DELETE'
+    }).then(res => res.json())
+      .then(data => {
+        if(data.success){
+          this.getPost()
+        }else{
+          console.log(data.error);
+        }
+    }).catch(error => console.log(error))
+  }
+
   createPost(post){
     fetch('/post', {
       credentials: "same-origin",
@@ -98,10 +144,35 @@ class App extends React.Component{
     }).catch(error => console.log(error))
   }
 
-  toggleState(st1, st2){
+  completePost(post){
+    post.completed = !post.completed
+    console.log(post);
+    fetch('/post/completed', {
+      credentials: "same-origin",
+      method: 'PUT',
+      body: JSON.stringify(post),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(data => {
+      if(data.success){
+        this.setState({
+          post: data.post
+        })
+        this.getPost()
+      }else{
+        console.log('no posts');
+      }
+    }).catch(error => console.log(error))
+  }
+
+  toggleState(st1, st2, st3){
     this.setState({
       [st1]: true,
       [st2]: false,
+      [st3]: false
     })
   }
 
@@ -110,6 +181,11 @@ class App extends React.Component{
         editPost: index,
         post: post
     })
+  }
+
+  goToTop(){
+    console.log('clicked');
+    window.scrollTo(0,0);
   }
 
   checkSession(){
@@ -143,6 +219,7 @@ class App extends React.Component{
             name: '',
             myTasks: false,
             dashboard: true,
+            browseTasks: false,
             post: {},
             posts: [],
             editPost: null
@@ -157,20 +234,34 @@ class App extends React.Component{
         {
           this.state.loggedIn ?
           <div>
-            <Nav logOut={this.logOut} name={this.state.name} loggedIn={this.state.loggedIn} />
+            <Nav goToTop={this.goToTop} toggleState={this.toggleState} logOut={this.logOut} name={this.state.name} loggedIn={this.state.loggedIn} />
             <Post name={this.state.name} createPost={this.createPost}/>
-            <Dashboard editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+            {
+              this.state.browseTasks?
+              <BrowseTasks state={this.state}/>
+              :
+              <Dashboard completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+            }
+
           </div>
           :
           <div>
             <Auth checkSession={this.checkSession} />
-            <Nav />
-            <Header />
-            <Services />
-            <About />
-            <Info />
-            <Recent state={this.state}/>
-            <Data />
+            <Nav  goToTop={this.goToTop} toggleState={this.toggleState}/>
+            {
+              this.state.browseTasks?
+              <BrowseTasks state={this.state}/>
+              :
+              <section>
+                <Header />
+                <Services  goToTop={this.goToTop} toggleState={this.toggleState}/>
+                <About />
+                <Info />
+                <Recent goToTop={this.goToTop} toggleState={this.toggleState} state={this.state}/>
+                <Data />
+              </section>
+            }
+
             <CallToAction />
             <Footer />
           </div>

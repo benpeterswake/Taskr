@@ -25,9 +25,12 @@ class Nav extends React.Component{
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#postModal">Post a task</button>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}>
-                  Browse Tasks
-                  </a>
+                {
+                  this.props.state.browseTasks?
+                  <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Task</a>
+                  :
+                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Task</a>
+                }
                 </li>
                 <li class="nav-item">
                   <a class="nav-link">My Tasks</a>

@@ -5,6 +5,7 @@ class App extends React.Component{
       loggedIn: false,
       name: '',
       myTasks: false,
+      myWork: false,
       dashboard: true,
       browseTasks: false,
       posts: [],
@@ -143,7 +144,7 @@ class App extends React.Component{
           this.setState({
             createSuccess: true
           })
-          this.toggleState("myTasks", "dashboard");
+          this.toggleState("myTasks", "dashboard","myWork");
           this.getPost()
           $('.list-group-item-danger').removeClass('list-group-item-danger');
           $('#myTasks').addClass('list-group-item-danger')

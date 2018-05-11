@@ -20,9 +20,9 @@ class Dashboard extends React.Component{
                     <i class="far fa-user-circle"></i>
                   </div>
                   <p class="text-muted">{this.props.state.name}</p>
-                  <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks"); this.changeActive("dashboard-btn")}}>Dashboard</li>
-                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>My Tasks</li>
-                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myWork")}}>My Work</li>
+                  <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork"); this.changeActive("dashboard-btn")}}>Dashboard</li>
+                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork"); this.changeActive("myTasks")}}>My Tasks</li>
+                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks"); this.changeActive("myWork")}}>My Work</li>
                   <li class="list-group-item">Notifications</li>
                   <li class="list-group-item">Payments</li>
                   <li class="list-group-item">Settings</li>
@@ -166,6 +166,16 @@ class Dashboard extends React.Component{
                   :
                   null
                   }
+                  {
+                  this.props.state.myWork?
+                    <div class="inner">
+                      <h5 class="text-gery">My Work</h5>
+                      <hr/>
+                    </div>
+                  :
+                  null
+                  }
+
                 </div>
             </div>
           </div>

@@ -44,11 +44,7 @@ class BrowseTasks extends React.Component{
                     }
                 </div>
                 <div class="col-lg-6 left-col-browse mt-6">
-                  <iframe
-                  id="map"
-                  frameborder="0"
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCcW5MvI978Kzo00mC8SYZMLRApYx3ceyw&q=Space+Needle,Seattle+WA" allowfullscreen>
-                  </iframe>
+      
                 </div>
               </div>
             </div>

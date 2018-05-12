@@ -66,7 +66,7 @@ class MyWork extends React.Component{
                       <span class="badge badge-warning float-right">Pending</span>
                       <span class="card-text">Task: {offer.title}</span><br/>
                       <span class="card-text">User: {offer.name}</span><br/>
-                      <span class="card-text">budget: ${offer.budget}{post.total?null:'/hr'}</span><br/>
+                      <span class="card-text">budget: ${offer.budget}{offer.total?null:'/hr'}</span><br/>
                       <span class="card-text">Due date: {offer.date}</span>
                     </div>
                   </div>
@@ -94,7 +94,7 @@ class MyWork extends React.Component{
                       <span class="badge badge-success float-right">Accepted</span>
                       <span class="card-text">Task: {offer.title}</span><br/>
                       <span class="card-text">User: {offer.name}</span><br/>
-                      <span class="card-text">budget: ${offer.budget}{post.total?null:'/hr'}</span><br/>
+                      <span class="card-text">budget: ${offer.budget}{offer.total?null:'/hr'}</span><br/>
                       <span class="card-text">Due date: {offer.date}</span>
                     </div>
                   </div>

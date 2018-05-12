@@ -1,3 +1,22 @@
+class Notifications extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return(
+      <div class="inner">
+        <h5 class="text-gery">Notifications</h5>
+        <hr/>
+            <div class="col-lg-6 text-center mx-auto">
+                <i class="fas fa-bullhorn mt-4"></i>
+               <h5 class="mt-4 mb-4">You have no notifications...</h5>
+            </div>
+      </div>
+    )
+  }
+}
+
 class MyWork extends React.Component{
   constructor(props){
     super(props)
@@ -16,9 +35,10 @@ class MyWork extends React.Component{
                   <div class="card text-white bg-secondary ">
                     <div class="card-body">
                       <span class="badge badge-warning float-right">Pending</span>
-                      <p class="card-text">Task: {offer.title}</p>
-                      <p class="card-text">User: {offer.name}</p>
-                      <p class="card-text">budget: ${offer.budget}</p>
+                      <span class="card-text">Task: {offer.title}</span><br/>
+                      <span class="card-text">User: {offer.name}</span><br/>
+                      <span class="card-text">budget: ${offer.budget}</span><br/>
+                      <span class="card-text">Due date: {offer.date}</span>
                     </div>
                   </div>
                 </div>
@@ -55,10 +75,10 @@ class Dashboard extends React.Component{
                     <i class="far fa-user-circle"></i>
                   </div>
                   <p class="text-muted">{this.props.state.name}</p>
-                  <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork"); this.props.changeActive("dashboard-btn")}}>Dashboard</li>
-                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork"); this.props.changeActive("myTasks")}}>My Tasks</li>
-                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks"); this.props.changeActive("myWork")}}>My Work</li>
-                  <li class="list-group-item">Notifications</li>
+                  <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork","notifications"); this.props.changeActive("dashboard-btn")}}>Dashboard</li>
+                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork","notifications"); this.props.changeActive("myTasks")}}>My Tasks</li>
+                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks","notifications"); this.props.changeActive("myWork")}}>My Work</li>
+                  <li id="notifications" class="list-group-item" onClick={(event) => {this.props.toggleState("notifications","myWork", "dashboard", "myTasks"); this.props.changeActive("notifications")}}>Notifications</li>
                   <li class="list-group-item text-danger" onClick={this.props.logOut}>Logout</li>
                 </div>
                 <div class="col-lg-9 right-col">
@@ -106,7 +126,7 @@ class Dashboard extends React.Component{
                               </div>
                             </div>
                             <div class="col-lg-3">
-                              <div class="card">
+                              <div class="card" data-toggle="modal" data-target="#postModal">
                                   <img class="card-img-top" src="http://rosascleaningservicellc.com/wp-content/uploads/sites/4466/2017/09/slide-1.jpg" alt="" />
                                   <div class="card-footer text-muted">
                                     House Cleaning Services
@@ -202,6 +222,12 @@ class Dashboard extends React.Component{
                   {
                   this.props.state.myWork?
                     <MyWork state={this.props.state}/>
+                  :
+                  null
+                  }
+                  {
+                  this.props.state.notifications?
+                    <Notifications state={this.props.state}/>
                   :
                   null
                   }

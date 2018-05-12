@@ -9,6 +9,7 @@ class App extends React.Component{
       myWork: false,
       dashboard: true,
       browseTasks: false,
+      notifications: false,
       posts: [],
       recentPosts:[],
       allPosts: [],
@@ -149,7 +150,7 @@ class App extends React.Component{
           this.setState({
             createSuccess: true
           })
-          this.toggleState("myTasks", "dashboard","myWork","browseTasks");
+          this.toggleState("myTasks", "dashboard","myWork","browseTasks","notifications");
           this.getPost()
           $('.list-group-item-danger').removeClass('list-group-item-danger');
           $('#myTasks').addClass('list-group-item-danger')
@@ -210,7 +211,6 @@ class App extends React.Component{
       method: 'GET',
     }).then(res => res.json())
       .then(data => {
-
       if(data.success){
         this.setState({
           offers: data.offers,
@@ -258,6 +258,7 @@ class App extends React.Component{
             myWork: false,
             dashboard: true,
             browseTasks: false,
+            notifications:false,
             posts: [],
             allPosts: [],
             post: {},
@@ -271,12 +272,13 @@ class App extends React.Component{
     }).catch(error => console.log(error))
   }
 
-  toggleState(st1, st2, st3, st4){
+  toggleState(st1, st2, st3, st4, st5){
     this.setState({
       [st1]: true,
       [st2]: false,
       [st3]: false,
-      [st4]: false
+      [st4]: false,
+      [st5]: false
     })
   }
 

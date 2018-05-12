@@ -15,6 +15,7 @@ class App extends React.Component{
       allPosts: [],
       post: {},
       offers: [],
+      notifications: null,
       editPost: null,
       completedSum: 0,
       createSuccess: false,
@@ -64,9 +65,14 @@ class App extends React.Component{
     }).then(res => res.json())
       .then(data => {
       if(data.success){
+        let num = 0;
+        for(let i=0; i<data.posts.length; i++){
+            num += data.posts[i].offers.length
+        }
         this.setState({
           posts: data.posts,
-          completedSum: 0
+          completedSum: 0,
+          notificationsNum: num
         })
       }else{
         console.log('no posts');
@@ -183,6 +189,7 @@ class App extends React.Component{
   }
 
   createOffer(post, index){
+    post.name = this.state.name
     fetch('/offer', {
       credentials: "same-origin",
       method: 'PUT',
@@ -214,7 +221,7 @@ class App extends React.Component{
       if(data.success){
         this.setState({
           offers: data.offers,
-          offerSuccess: true
+          offerSuccess: true,
         })
         console.log(this.state);
       }else{

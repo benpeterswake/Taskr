@@ -36,14 +36,11 @@ class BrowseTasks extends React.Component{
                               <span>
                               {
                                 post.completed?null:
-                              <div class="card text-white bg-secondary mt-3">
+                              <div class="card text-white bg-secondary  mt-3">
                               {
                                this.props.state.offerSuccess === index?
                                <div class="alert alert-success" role="alert">
                                  Offer made! The owner of the post as been notified
-                                 <button type="button" class="close" onClick={() =>           this.props.toggleState(null,null,"offerSuccess")}>
-                                   <span aria-hidden="true">&times;</span>
-                                 </button>
                                </div>:null
                                }
                                <div class="card-header">
@@ -94,7 +91,6 @@ class BrowseTasks extends React.Component{
                               }
                               </span>
                             }
-
                           </div>
                         )
                       })
@@ -104,6 +100,7 @@ class BrowseTasks extends React.Component{
                          <h5 class="mt-4 mb-4">Loading Posts...</h5>
                       </div>
                     }
+                    <div class="mt-4 mb-4"></div>
                 </div>
                 <div class="col-lg-6 left-col-browse mt-6">
                   <iframe

@@ -116,8 +116,14 @@ nav .nav-item .btn{
 #people{
   width: 25%;
 }
+.taskHead{
+  background: white;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+}
 .mt-6{
-  margin-top: 60px;
+  margin-top: 65px;
 }
 .input-group{
   width: 25%;
@@ -161,7 +167,7 @@ nav .nav-item .btn{
   cursor:default!important;
 }
 .fa-bullhorn{
-  font-size: 120px;
+  font-size: 80px;
 }
 .alert-secondary{
   background-color: #F5F9FB!important;
@@ -204,5 +210,10 @@ footer li{
     margin-left: 80px;
     height:62px;
     visibility: hidden;
+  }
+  .fa-chart-pie{
+    font-size:15em;
+    padding-bottom: 50px;
+    margin-top:-40px;
   }
 }

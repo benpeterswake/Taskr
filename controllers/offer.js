@@ -21,7 +21,7 @@ router.get('/' , (req, res) => {
 
 router.put('/', (req, res) => {
   if(req.session.currentUser){
-    let offerObj = {user_id: req.session.currentUser._id, name:  req.session.currentUser.name, budget: req.body.budget}
+    let offerObj = {user_id: req.session.currentUser._id, name:  req.body.name, budget: req.body.budget, total: req.body.total}
     console.log('body:', req.body);
     Post.findByIdAndUpdate(req.body._id, { $push: { offers: offerObj } }, {new:true}, (err, updatedPost) => {
       if(err){

@@ -8,16 +8,15 @@ class Nav extends React.Component{
         <div class="container">
         {
           this.props.loggedIn ?
-          <a class="navbar-brand" onClick={() => {this.props.toggleState('dashboard','browseTasks', 'myTasks','myWork'); this.props.goToTop()}}>Taskr</a>
+          <a class="navbar-brand" onClick={() => {this.props.toggleState('dashboard','browseTasks', 'myTasks','myWork','notifications'); this.props.goToTop()}}>Taskr</a>
           :
-          <a class="navbar-brand" onClick={() => {this.props.toggleState(null, null, 'browseTasks'); this.props.goToTop()}}>Taskr</a>
+          <a class="navbar-brand" onClick={() => {this.props.toggleState(null, null, null,'browseTasks'); this.props.goToTop()}}>Taskr</a>
         }
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="vl"></div>
           <div class="collapse navbar-collapse" id="navbarResponsive">
-
             {
               this.props.loggedIn ?
               <ul class="navbar-nav">
@@ -27,17 +26,17 @@ class Nav extends React.Component{
                 <li class="nav-item">
                 {
                   this.props.state.dashboard?
-                <a class="nav-link text-danger" onClick={() =>{this.props.toggleState( 'dashboard', 'myWork','browseTasks', 'myTasks'); this.props.changeActive("dashboard-btn"); this.props.goToTop()}}>Dashboard</a>
+                <a class="nav-link text-danger" onClick={() =>{this.props.toggleState( 'dashboard', 'myWork','browseTasks', 'myTasks','notifications'); this.props.changeActive("dashboard-btn"); this.props.goToTop()}}>Dashboard</a>
                   :
-                  <a class="nav-link" onClick={() =>{this.props.toggleState( 'dashboard', 'myWork','browseTasks', 'myTasks'); this.props.changeActive("dashboard-btn"); this.props.goToTop()}}>Dashboard</a>
+                  <a class="nav-link" onClick={() =>{this.props.toggleState( 'dashboard', 'myWork','browseTasks', 'myTasks','notifications'); this.props.changeActive("dashboard-btn"); this.props.goToTop()}}>Dashboard</a>
                 }
                 </li>
                 <li class="nav-item">
                 {
                   this.props.state.browseTasks?
-                  <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks','myWork','dashboard'); this.props.goToTop()}}> Browse Tasks</a>
+                  <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks','myWork','dashboard','notifications'); this.props.goToTop()}}> Browse Tasks</a>
                   :
-                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'myWork','dashboard'); this.props.goToTop()}}> Browse Tasks</a>
+                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'myWork','dashboard','notifications'); this.props.goToTop()}}> Browse Tasks</a>
                 }
                 </li>
 
@@ -50,9 +49,9 @@ class Nav extends React.Component{
                 <li class="nav-item">
                   {
                     this.props.state.browseTasks?
-                    <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Tasks</a>
+                    <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard','notifications'); this.props.goToTop()}}> Browse Tasks</a>
                     :
-                    <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Tasks</a>
+                    <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard','notifications'); this.props.goToTop()}}> Browse Tasks</a>
                   }
 
                 </li>

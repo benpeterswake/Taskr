@@ -197,7 +197,7 @@ class Dashboard extends React.Component{
                       <h5 class="text-center mt-5">Your Task Summary <br/><small>(Tasks you posted)</small></h5>
                       <div class="row text-center sum mt-4">
                         <div class="col-lg-3">
-                          <div class="card text-white bg-success" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                          <div class="card text-white bg-success" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.props.changeActive("myTasks")}}>
                               <h4>{this.props.state.posts.length}</h4>
                               <div class="card-footer">
                                 Active Posts
@@ -205,15 +205,15 @@ class Dashboard extends React.Component{
                           </div>
                         </div>
                         <div class="col-lg-3">
-                          <div class="card text-white bg-warning" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
-                              <h4>0</h4>
+                          <div class="card text-white bg-warning" onClick={() => {this.props.toggleState("notifications","myTasks", "dashboard"); this.props.changeActive("notifications")}}>
+                              <h4>{this.props.state.notificationsNum}</h4>
                             <div class="card-footer">
                               Offers
                             </div>
                           </div>
                         </div>
                         <div class="col-lg-3">
-                          <div class="card text-white bg-primary" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                          <div class="card text-white bg-primary" onClick={() => {this.props.toggleState("myTasks", "dashboard","notifications"); this.props.changeActive("myTasks")}}>
                                 <h4>0</h4>
                               <div class="card-footer">
                                 Accepted
@@ -221,7 +221,7 @@ class Dashboard extends React.Component{
                             </div>
                           </div>
                           <div class="col-lg-3">
-                            <div class="card text-white bg-info" onClick={() => {this.props.toggleState("myTasks", "dashboard"); this.changeActive("myTasks")}}>
+                            <div class="card text-white bg-info" onClick={() => {this.props.toggleState("myTasks", "dashboard","notifications"); this.props.changeActive("myTasks")}}>
                               <h4>
                               {this.props.state.completedSum}
                               </h4>

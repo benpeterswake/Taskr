@@ -77,7 +77,7 @@ class MyWork extends React.Component{
             :
             <div class="col-lg-8 text-center mx-auto">
                 <i class="fas fa-bullhorn mt-4"></i>
-               <h5 class="mt-4 mb-4">You have no new offers on tasks...</h5>
+               <h5 class="mt-4 mb-4 small">You have no new offers on tasks...</h5>
             </div>
           }
           </div>
@@ -104,7 +104,7 @@ class MyWork extends React.Component{
             :
             <div class="col-lg-8 text-center mx-auto">
                 <i class="fas fa-bullhorn mt-4"></i>
-               <h5 class="mt-4 mb-4">You have no accepted offers...</h5>
+               <h5 class="mt-4 mb-4 small">You have no accepted offers...</h5>
             </div>
           }
           </div>

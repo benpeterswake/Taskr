@@ -273,7 +273,7 @@ class App extends React.Component{
             editPost: null,
             completedSum: 0,
             createSuccess: false,
-            offerSuccess: false
+            offerSuccess: false,
           })
         }
     }).catch(error => console.log(error))
@@ -302,7 +302,6 @@ class App extends React.Component{
   }
 
   goToTop(){
-    console.log('clicked');
     window.scrollTo(0,0);
   }
 

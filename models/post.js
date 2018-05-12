@@ -12,8 +12,8 @@ const postModel = new Schema({
   hourly: Boolean,
   budget: Number,
   people: Number,
-  offers: [{user_id: String, name: String, offer: Number}],
-  accepted: [{user_id: String, name: String, offer: Number}],
+  offers: [{user_id:String, name: String, budget: Number}],
+  accepted: [{user_id: String, name: String, budget: Number}],
   completed: {type: Boolean, default: false}
 }, {timestamps: true})
 

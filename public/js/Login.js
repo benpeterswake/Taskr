@@ -61,7 +61,7 @@ class Login extends React.Component{
                 <button type="submit" class="btn btn-danger btn-block">Submit</button>
               </div>
             </form>
-              <p class="text-center py-2">New user? <a class="text-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#signupModal"> sign up!</a></p>
+              <p class="text-center py-2">New user? <a class="text-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#signupModal"> Sign up!</a></p>
           </div>
         </div>
       </div>

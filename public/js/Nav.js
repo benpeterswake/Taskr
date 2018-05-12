@@ -8,7 +8,7 @@ class Nav extends React.Component{
         <div class="container">
         {
           this.props.loggedIn ?
-          <a class="navbar-brand" onClick={() => {this.props.toggleState('dashboard','browseTasks', 'myTasks'); this.props.goToTop()}}>Taskr</a>
+          <a class="navbar-brand" onClick={() => {this.props.toggleState('dashboard','browseTasks', 'myTasks','myWork'); this.props.goToTop()}}>Taskr</a>
           :
           <a class="navbar-brand" onClick={() => {this.props.toggleState(null, null, 'browseTasks'); this.props.goToTop()}}>Taskr</a>
         }
@@ -26,15 +26,21 @@ class Nav extends React.Component{
                 </li>
                 <li class="nav-item">
                 {
-                  this.props.state.browseTasks?
-                  <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Task</a>
+                  this.props.state.dashboard?
+                <a class="nav-link text-danger" onClick={() =>{this.props.toggleState( 'dashboard', 'myWork','browseTasks', 'myTasks'); this.props.changeActive("dashboard-btn"); this.props.goToTop()}}>Dashboard</a>
                   :
-                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Task</a>
+                  <a class="nav-link" onClick={() =>{this.props.toggleState( 'dashboard', 'myWork','browseTasks', 'myTasks'); this.props.changeActive("dashboard-btn"); this.props.goToTop()}}>Dashboard</a>
                 }
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link">My Tasks</a>
+                {
+                  this.props.state.browseTasks?
+                  <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks','myWork','dashboard'); this.props.goToTop()}}> Browse Tasks</a>
+                  :
+                  <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'myWork','dashboard'); this.props.goToTop()}}> Browse Tasks</a>
+                }
                 </li>
+
               </ul>
               :
               <ul class="navbar-nav">
@@ -44,9 +50,9 @@ class Nav extends React.Component{
                 <li class="nav-item">
                   {
                     this.props.state.browseTasks?
-                    <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Task</a>
+                    <a class="nav-link text-danger" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Tasks</a>
                     :
-                    <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Task</a>
+                    <a class="nav-link" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard'); this.props.goToTop()}}> Browse Tasks</a>
                   }
 
                 </li>

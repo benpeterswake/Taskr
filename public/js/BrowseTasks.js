@@ -1,7 +1,18 @@
 class BrowseTasks extends React.Component{
   constructor(props){
     super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
+
+  componentDidMount(){
+    this.props.getAllPosts()
+  }
+
+  handleClick(post, index){
+    console.log(post);
+    this.props.createOffer(post, index)
+  }
+
   render(){
     return(
         <section id="browse">
@@ -12,27 +23,78 @@ class BrowseTasks extends React.Component{
                     {
                       this.props.state.allPosts.length > 0 ?
                       this.props.state.allPosts.map((post, index) => {
+                        let found = false;
+                        for(let i=0; i<post.offers.length; i++){
+                          if(post.offers[i].user_id === this.props.state.id){
+                            found = true
+                          }
+                        }
                         return(
-                          <div class="col-lg-12">
-                            <div class="card text-white bg-secondary mb-3 mt-3">
-                             <div class="card-header">
-                              {post.title}
-                              {post.completed?<span class="badge badge-danger float-right">Completed</span>:<span class="badge badge-success float-right">Active</span>}
-                             </div>
-                              <div class="card-body">
-                                <p class="card-text">Posted By: {post.name}</p>
-                                <p class="card-text">Budget: ${post.budget} {post.hourly?'/hr':null} | Due Date: {post.date}</p>
-                                <p class="card-text">Location: {post.location} | People: {post.people}</p>
-                                <p class="card-text">Offers: {post.offers.length>0? post.offers: 'None'}</p>
-                                <p class="card-text">Description: {post.description}</p>
-                              </div>
-                              <div class="card-footer bg-dark">
+                          <div class="col-lg-12 ">
+                            {
+                              post.user_id === this.props.state.id?null:
+                              <span>
                               {
-                                post.completed?'This task was completed':
-                                <a href="#" class="card-link">Make Offer</a>
-                              }
+                                post.completed?null:
+                              <div class="card text-white bg-secondary mt-3">
+                              {
+                               this.props.state.offerSuccess === index?
+                               <div class="alert alert-success" role="alert">
+                                 Offer made! The owner of the post as been notified
+                                 <button type="button" class="close" onClick={() =>           this.props.toggleState(null,null,"offerSuccess")}>
+                                   <span aria-hidden="true">&times;</span>
+                                 </button>
+                               </div>:null
+                               }
+                               <div class="card-header">
+                                {post.title}
+                                {post.completed?<span class="badge badge-danger float-right">Completed</span>:<span class="badge badge-success float-right">Active</span>}
+                               </div>
+                                <div class="card-body">
+                                  <h4 class="float-right">${post.budget}{post.hourly?'/hr':null}
+                                  <br/>
+                                  <span class="small">Offers:
+                                        {
+                                          post.offers.length>0?
+                                           " " + post.offers.length
+                                          : ' None'
+                                        }
+                                  </span><br/>
+                                  <span class="small">People required: {post.people}</span>
+                                  </h4>
+                                  <span class="small"><i class="fas fa-user-tag"></i> {post.name}</span><br/>
+                                  <span class="small"><i class="far fa-calendar"></i> {post.date}</span><br/>
+                                  <span class="small"><i class="fas fa-map-marker"></i>  {post.location}</span><br/>
+
+                                  <span class="small"><i class="fas fa-align-left"></i> {post.description}</span>
+                                </div>
+                                <div class="card-footer bg-dark">
+                                  <span>
+                                  {
+                                    this.props.state.loggedIn?
+                                    <span>
+                                    {
+                                      this.props.state.offerSuccess === index?<span class="small">You have already applied to this posting</span> :
+                                      <span>
+                                      {
+                                        found?
+                                        <span class="small">You have already applied to this posting</span>
+                                        :
+                                        <a href="#" onClick={() => this.handleClick(post, index)} class="card-link">Submit Offer</a>
+                                      }
+                                      </span>
+                                    }
+                                    </span>
+                                    :
+                                    <a  href="#" class="card-link" data-toggle="modal" data-target="#loginModal">Submit Offer</a>
+                                  }
+                                  </span>
+                                </div>
                               </div>
-                            </div>
+                              }
+                              </span>
+                            }
+
                           </div>
                         )
                       })
@@ -44,7 +106,11 @@ class BrowseTasks extends React.Component{
                     }
                 </div>
                 <div class="col-lg-6 left-col-browse mt-6">
-      
+                  <iframe
+                  id="map"
+                  frameborder="0"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCcW5MvI978Kzo00mC8SYZMLRApYx3ceyw&q=Atlanta+GA" allowfullscreen>
+                  </iframe>
                 </div>
               </div>
             </div>

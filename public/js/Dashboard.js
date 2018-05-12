@@ -1,13 +1,48 @@
+class MyWork extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return(
+      <div class="inner">
+        <h5 class="text-gery">My Work</h5>
+        <hr/>
+          {
+            this.props.state.offers.length > 0?
+            this.props.state.offers.map((offer, index) => {
+              return (
+                <div class="col-lg-10 mt-4 mx-auto">
+                  <div class="card text-white bg-secondary ">
+                    <div class="card-body">
+                      <span class="badge badge-warning float-right">Pending</span>
+                      <p class="card-text">Task: {offer.title}</p>
+                      <p class="card-text">User: {offer.name}</p>
+                      <p class="card-text">budget: ${offer.budget}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+            :
+            <div class="col-lg-6 text-center mx-auto">
+                <i class="fas fa-bullhorn mt-4"></i>
+               <h5 class="mt-4 mb-4">You have no work history...</h5>
+               <button class="btn btn-danger">Browse tasks!</button>
+            </div>
+          }
+      </div>
+    )
+  }
+}
+
 class Dashboard extends React.Component{
   constructor(props){
     super(props)
   }
   componentDidMount(){
     this.props.getPost()
-  }
-  changeActive(id){
-    $('.list-group-item-danger').removeClass('list-group-item-danger');
-    $('#'+id).addClass('list-group-item-danger')
+    this.props.getOffers()
   }
   render(){
     return(
@@ -20,12 +55,10 @@ class Dashboard extends React.Component{
                     <i class="far fa-user-circle"></i>
                   </div>
                   <p class="text-muted">{this.props.state.name}</p>
-                  <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork"); this.changeActive("dashboard-btn")}}>Dashboard</li>
-                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork"); this.changeActive("myTasks")}}>My Tasks</li>
-                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks"); this.changeActive("myWork")}}>My Work</li>
+                  <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork"); this.props.changeActive("dashboard-btn")}}>Dashboard</li>
+                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork"); this.props.changeActive("myTasks")}}>My Tasks</li>
+                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks"); this.props.changeActive("myWork")}}>My Work</li>
                   <li class="list-group-item">Notifications</li>
-                  <li class="list-group-item">Payments</li>
-                  <li class="list-group-item">Settings</li>
                   <li class="list-group-item text-danger" onClick={this.props.logOut}>Logout</li>
                 </div>
                 <div class="col-lg-9 right-col">
@@ -124,7 +157,7 @@ class Dashboard extends React.Component{
                         <div class="row text-center sum mt-4 mb-5">
                           <div class="col-lg-3">
                             <div class="card  text-white bg-secondary">
-                                <h4>0</h4>
+                                <h4>{this.props.state.offers.length}</h4>
                                 <div class="card-footer">
                                   Offers Made
                                 </div>
@@ -168,10 +201,7 @@ class Dashboard extends React.Component{
                   }
                   {
                   this.props.state.myWork?
-                    <div class="inner">
-                      <h5 class="text-gery">My Work</h5>
-                      <hr/>
-                    </div>
+                    <MyWork state={this.props.state}/>
                   :
                   null
                   }

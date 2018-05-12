@@ -4,6 +4,7 @@ class App extends React.Component{
     this.state = {
       loggedIn: false,
       name: '',
+      id: '',
       myTasks: false,
       myWork: false,
       dashboard: true,
@@ -12,9 +13,11 @@ class App extends React.Component{
       recentPosts:[],
       allPosts: [],
       post: {},
+      offers: [],
       editPost: null,
       completedSum: 0,
-      createSuccess: false
+      createSuccess: false,
+      offerSuccess: false
     }
     this.toggleState = this.toggleState.bind(this)
     this.checkSession = this.checkSession.bind(this)
@@ -28,6 +31,8 @@ class App extends React.Component{
     this.logOut = this.logOut.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
     this.goToTop = this.goToTop.bind(this)
+    this.createOffer = this.createOffer.bind(this)
+    this.getOffers = this.getOffers.bind(this)
   }
 
   componentDidMount(){
@@ -144,7 +149,7 @@ class App extends React.Component{
           this.setState({
             createSuccess: true
           })
-          this.toggleState("myTasks", "dashboard","myWork");
+          this.toggleState("myTasks", "dashboard","myWork","browseTasks");
           this.getPost()
           $('.list-group-item-danger').removeClass('list-group-item-danger');
           $('#myTasks').addClass('list-group-item-danger')
@@ -176,24 +181,46 @@ class App extends React.Component{
     }).catch(error => console.log(error))
   }
 
-  toggleState(st1, st2, st3){
-    this.setState({
-      [st1]: true,
-      [st2]: false,
-      [st3]: false
-    })
+  createOffer(post, index){
+    fetch('/offer', {
+      credentials: "same-origin",
+      method: 'PUT',
+      body: JSON.stringify(post),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(data => {
+      if(data.success){
+        this.setState({
+          post: data.post,
+          offerSuccess: index
+        })
+        this.getPost()
+      }else{
+        console.log('no posts');
+      }
+    }).catch(error => console.log(error))
   }
 
-  toggleEdit(index, post){
-    this.setState({
-        editPost: index,
-        post: post
-    })
-  }
+  getOffers(){
+    fetch('/offer', {
+      credentials: "same-origin",
+      method: 'GET',
+    }).then(res => res.json())
+      .then(data => {
 
-  goToTop(){
-    console.log('clicked');
-    window.scrollTo(0,0);
+      if(data.success){
+        this.setState({
+          offers: data.offers,
+          offerSuccess: true
+        })
+        console.log(this.state);
+      }else{
+        console.log('no posts');
+      }
+    }).catch(error => console.log(error))
   }
 
   checkSession(){
@@ -205,7 +232,8 @@ class App extends React.Component{
       if(data.auth === 'logged in'){
         this.setState({
           loggedIn: true,
-          name: data.user.first_name + " " + data.user.last_name
+          name: data.user.first_name + " " + data.user.last_name,
+          id: data.user._id
         })
       }
     }).catch(error => console.log(error))
@@ -225,15 +253,48 @@ class App extends React.Component{
           this.setState({
             loggedIn: false,
             name: '',
+            id: '',
             myTasks: false,
+            myWork: false,
             dashboard: true,
             browseTasks: false,
-            post: {},
             posts: [],
-            editPost: null
+            allPosts: [],
+            post: {},
+            offers: [],
+            editPost: null,
+            completedSum: 0,
+            createSuccess: false,
+            offerSuccess: false
           })
         }
     }).catch(error => console.log(error))
+  }
+
+  toggleState(st1, st2, st3, st4){
+    this.setState({
+      [st1]: true,
+      [st2]: false,
+      [st3]: false,
+      [st4]: false
+    })
+  }
+
+  toggleEdit(index, post){
+    this.setState({
+        editPost: index,
+        post: post
+    })
+  }
+
+  changeActive(id){
+    $('.list-group-item-danger').removeClass('list-group-item-danger');
+    $('#'+id).addClass('list-group-item-danger')
+  }
+
+  goToTop(){
+    console.log('clicked');
+    window.scrollTo(0,0);
   }
 
   render(){
@@ -242,13 +303,13 @@ class App extends React.Component{
         {
           this.state.loggedIn ?
           <div>
-            <Nav state={this.state} goToTop={this.goToTop} toggleState={this.toggleState} logOut={this.logOut} name={this.state.name} loggedIn={this.state.loggedIn} />
+            <Nav changeActive={this.changeActive} state={this.state} goToTop={this.goToTop} toggleState={this.toggleState} logOut={this.logOut} name={this.state.name} loggedIn={this.state.loggedIn} />
             <Post name={this.state.name} createPost={this.createPost}/>
             {
               this.state.browseTasks?
-              <BrowseTasks state={this.state}/>
+              <BrowseTasks getAllPosts={this.getAllPosts} toggleState={this.toggleState} createOffer={this.createOffer} state={this.state}/>
               :
-              <Dashboard toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+              <Dashboard changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
             }
 
           </div>
@@ -258,7 +319,7 @@ class App extends React.Component{
             <Nav state={this.state} goToTop={this.goToTop} toggleState={this.toggleState}/>
             {
               this.state.browseTasks?
-              <BrowseTasks state={this.state}/>
+              <BrowseTasks getAllPosts={this.getAllPosts} state={this.state}/>
               :
               <section>
                 <Header />

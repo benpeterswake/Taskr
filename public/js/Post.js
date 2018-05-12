@@ -20,7 +20,7 @@ class Post extends React.Component{
       description: '',
       location: '',
       date: this.date,
-      budget: '',
+      budget: null,
       total: true,
       hourly: false,
       people: 1,
@@ -99,10 +99,16 @@ class Post extends React.Component{
           $('.nav-tabs > .active').next('a').trigger('click');
         }
       }else{
+        if(this.state.people < 1 || this.state.budget === null){
+          this.setState({
+            error: true
+          })
+        }else{
           $('#postBtn').attr('type', 'submit')
           $('#nav-profile-tab').addClass('disabled')
           $('#nav-contact-tab').addClass('disabled')
           $('#nav-home-tab').trigger('click')
+        }
     }
   }
 

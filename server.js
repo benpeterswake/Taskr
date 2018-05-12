@@ -11,7 +11,8 @@ const session = require('express-session');
 //Controllers
 const loginController = require('./controllers/login.js');
 const signupController = require('./controllers/signup.js');
-const postController = require('./controllers/post.js')
+const postController = require('./controllers/post.js');
+const offerController = require('./controllers/offer.js');
 
 //Middleware
 app.use(express.static('public'));
@@ -22,9 +23,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-app.use('/signup', signupController)
-app.use('/login', loginController)
-app.use('/post', postController)
+app.use('/signup', signupController);
+app.use('/login', loginController);
+app.use('/post', postController);
+app.use('/offer', offerController);
 
 app.listen(port, ()=> {
   console.log('listening to on port', port);

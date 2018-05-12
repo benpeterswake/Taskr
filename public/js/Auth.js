@@ -31,7 +31,7 @@ class Auth extends React.Component{
           });
         }else{
           this.props.checkSession()
-          this.props.toggleState('dashboard','browseTasks', 'myTasks');
+          this.props.toggleState('dashboard','browseTasks', 'myTasks', 'MyWork');
           $('#loginModal').modal('hide');
         }
 

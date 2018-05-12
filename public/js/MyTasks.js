@@ -11,7 +11,6 @@ class MyTasks extends React.Component{
   }
 
   handleComplete(post){
-    event.preventDefault();
     this.props.completePost(post)
   }
 
@@ -43,17 +42,27 @@ class MyTasks extends React.Component{
                         {post.completed?<span class="badge badge-danger float-right">Completed</span>:<span class="badge badge-success float-right">Active</span>}
                        </div>
                         <div class="card-body">
-                          <p class="card-text">Posted By: {post.name}</p>
-                          <p class="card-text">Budget: ${post.budget} {post.hourly?'/hr':null} | Due Date: {post.date}</p>
-                          <p class="card-text">Location: {post.location} | People: {post.people}</p>
-                          <p class="card-text">Offers: {post.offers.length>0? post.offers: 'None'}</p>
-                          <p class="card-text">Description: {post.description}</p>
+                        <h4 class="float-right">${post.budget}{post.hourly?'/hr':null}
+                        <br/>
+                        <span class="small">Offers:
+                              {
+                                post.offers.length>0?
+                                 " " + post.offers.length
+                                : ' None'
+                              }
+                        </span><br/>
+                        <span class="small">People required: {post.people}</span>
+                        </h4>
+                        <span class="small"><i class="fas fa-user-tag"></i> {post.name}</span><br/>
+                        <span class="small"><i class="far fa-calendar"></i> {post.date}</span><br/>
+                        <span class="small"><i class="fas fa-map-marker"></i>  {post.location}</span><br/>
+
+                        <span class="small"><i class="fas fa-align-left"></i> {post.description}</span>
                         </div>
                         <div class="card-footer bg-dark">
                         <a href="#" class="card-link" onClick={() => this.props.toggleEdit(index, post)}>Edit Task</a>
                         <a href="#" class="card-link text-danger" onClick={() => this.handleClick(post)}>Delete Task</a>
                         {post.completed?<a href="#" class="card-link text-warning" onClick={() => this.handleComplete(post)}>Mark As Active</a>:<a href="#" class="card-link text-success" onClick={() => this.handleComplete(post)}>Mark As Completed</a>}
-
                         </div>
                       </div>
                       :

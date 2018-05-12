@@ -11,7 +11,7 @@ router.get('/all', (req, res) => {
           console.log(posts);
           res.json({posts: posts, success: "Found posts"})
         }
-      })
+      }).sort('-createdAt').limit(50)
 });
 
 router.get('/', (req, res) => {
@@ -48,7 +48,7 @@ router.put('/completed', (req, res) => {
       auth: 'logged out'
     })
   }
-})
+});
 
 router.put('/', (req, res) => {
   if(req.session.currentUser){
@@ -66,7 +66,7 @@ router.put('/', (req, res) => {
       auth: 'logged out'
     })
   }
-})
+});
 
 router.get('/recent', (req, res) => {
     Post.find({}, (err, posts) => {
@@ -116,7 +116,6 @@ router.delete('/:id',(req, res) => {
       auth: 'logged out'
     })
   }
-})
-
+});
 
 module.exports = router;

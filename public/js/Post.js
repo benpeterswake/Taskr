@@ -2,14 +2,15 @@ class Post extends React.Component{
   constructor(props){
     super(props)
 
-    let month = new Date().getDate()
+    let month = new Date().getMonth()+1
     if(month < 10){
-      month = "0" + new Date().getDate()
+      month = "0" + new Date().getMonth()
     }
-    let day = new Date().getDay()
+    let day = new Date().getDate()
     if(day < 10){
-      day = "0" + new Date().getDay()
+      day = "0" + new Date().getDate()
     }
+    console.log(day);
     let year = new Date().getFullYear()
 
     this.date = year + "-" + month + "-" +  day;

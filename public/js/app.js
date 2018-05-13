@@ -20,6 +20,7 @@ class App extends React.Component{
       editPost: null,
       completedSum: 0,
       workSum: 0,
+      inProgress: null,
       createSuccess: false,
       offerSuccess: false
     }
@@ -70,13 +71,16 @@ class App extends React.Component{
       .then(data => {
       if(data.success){
         let num = 0;
+        let num2= 0;
         for(let i=0; i<data.posts.length; i++){
           num += data.posts[i].offers.length
+          num2 += data.posts[i].accepted.length;
         }
         this.setState({
           posts: data.posts,
           completedSum: 0,
           notificationsNum: num,
+          inProgress: num2
         })
       }else{
         console.log('no posts');
@@ -331,6 +335,8 @@ class App extends React.Component{
             completedSum: 0,
             createSuccess: false,
             offerSuccess: false,
+            workSum: null,
+            inProgress: null,
           })
         }
     }).catch(error => console.log(error))

@@ -152,7 +152,7 @@ class Dashboard extends React.Component{
                   </div>
                   <p class="text-muted">{this.props.state.name}</p>
                   <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork","notifications"); this.props.changeActive("dashboard-btn")}}>Dashboard</li>
-                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork","notifications"); this.props.changeActive("myTasks")}}>My Tasks</li>
+                  <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork","notifications"); this.props.changeActive("myTasks")}}>My Tasks <span class="badge badge-pill badge-warning">{this.props.state.inProgress}</span></li>
                   <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks","notifications"); this.props.changeActive("myWork")}}>My Work <span class="badge badge-pill badge-success"> {this.props.state.workSum}</span></li>
                   <li id="notifications" class="list-group-item" onClick={(event) => {this.props.toggleState("notifications","myWork", "dashboard", "myTasks"); this.props.changeActive("notifications")}}>Notifications <span class="badge badge-pill badge-warning">{this.props.state.notificationsNum}</span></li>
                   <li class="list-group-item text-danger" onClick={this.props.logOut}>Logout</li>
@@ -261,7 +261,7 @@ class Dashboard extends React.Component{
                           </div>
                           <div class="col-lg-3">
                             <div class="card  text-white bg-secondary">
-                              <h4>0</h4>
+                              <h4>{this.props.state.workSum}</h4>
                               <div class="card-footer">
                                 Offers Accepted
                               </div>

@@ -39,7 +39,19 @@ class MyTasks extends React.Component{
                       <div class="card text-white bg-secondary mt-4">
                        <div class="card-header">
                         {post.title}
-                        {post.completed?<span class="badge badge-danger float-right">Completed</span>:<span class="badge badge-success float-right">Active</span>}
+                        {
+                          post.completed?
+                          <span class="badge badge-danger float-right">Completed</span>
+                          :
+                          <span>
+                          {
+                            post.accepted.length > 0?
+                            <span class="badge badge-warning float-right">In Progress</span>
+                            :
+                            <span class="badge badge-success float-right">Active</span>
+                          }
+                          </span>
+                        }
                        </div>
                         <div class="card-body">
                         <h4 class="float-right">${post.budget}{post.hourly?'/hr':null}

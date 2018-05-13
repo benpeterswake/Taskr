@@ -35,6 +35,7 @@ class App extends React.Component{
     this.goToTop = this.goToTop.bind(this)
     this.createOffer = this.createOffer.bind(this)
     this.getOffers = this.getOffers.bind(this)
+    this.acceptOffer = this.acceptOffer.bind(this)
   }
 
   componentDidMount(){
@@ -230,6 +231,34 @@ class App extends React.Component{
     }).catch(error => console.log(error))
   }
 
+  acceptOffer(post, id){
+    post.id = id
+    fetch('/offer/accept', {
+      credentials: "same-origin",
+      method: 'PUT',
+      body: JSON.stringify(post),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(data => {
+      if(data.success){
+        this.setState({
+          post: data.post,
+          notifications: false,
+          dashboard: false,
+          myTasks: true,
+          myWork: false,
+          browseTasks: false
+        })
+        this.getPost()
+      }else{
+        console.log('no posts');
+      }
+    }).catch(error => console.log(error))
+  }
+
   checkSession(){
     fetch('/login', {
       credentials: "same-origin"
@@ -318,7 +347,7 @@ class App extends React.Component{
               this.state.browseTasks?
               <BrowseTasks getAllPosts={this.getAllPosts} toggleState={this.toggleState} createOffer={this.createOffer} state={this.state}/>
               :
-              <Dashboard changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+              <Dashboard acceptOffer={this.acceptOffer} changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
             }
           </div>
           :

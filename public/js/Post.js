@@ -4,7 +4,7 @@ class Post extends React.Component{
 
     let month = new Date().getMonth()+1
     if(month < 10){
-      month = "0" + new Date().getMonth()
+      month = "0" + (new Date().getMonth()+1)
     }
     let day = new Date().getDate()
     if(day < 10){
@@ -191,7 +191,7 @@ class Post extends React.Component{
                   <div class="form-group">
                     <label>Due Date</label><br/>
                     <input id="datebox1" type="radio" onClick={ this.changeDate } checked={this.state.today}/> <label for="datebox1"> Today (A.S.A.P)</label> <input id="datebox2" type="radio" onClick={ this.changeDate } checked={this.state.certain} /> <label for="datebox2">By Certain Date</label>
-                    <input type="date" id="date" class="form-control" onChange={this.handleDateChange} value={this.state.date}  placeholder="Due Date" required/>
+                    <input type="date" id="date" min={this.date} class="form-control" onChange={this.handleDateChange} value={this.state.date}  placeholder="Due Date" required/>
                   </div>
                 </div>
 

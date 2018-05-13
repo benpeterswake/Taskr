@@ -21,8 +21,8 @@ class Notifications extends React.Component{
                           <div class="card-body">
                             <span class="badge badge-warning">Pending Your Approval</span><br/>
                             <p class="card-text mt-2">{offer.name} made an offer on <strong>{post.title}</strong></p>
-                            <h5 class="card-text">${offer.budget}</h5>
-                            <p><button class="btn btn-success btn-sm">Accept Offer</button></p>
+                            <h5 class="card-text">${offer.budget}{offer.total?null:'/hr'}</h5>
+                            <p><button onClick={() => this.props.acceptOffer(offer, post._id)} class="btn btn-success btn-sm">Accept Offer</button></p>
                             <p><button class="btn btn-danger btn-sm">Decline Offer</button></p>
                           </div>
                         </div>
@@ -287,7 +287,7 @@ class Dashboard extends React.Component{
                   }
                   {
                   this.props.state.notifications?
-                    <Notifications state={this.props.state}/>
+                    <Notifications acceptOffer={this.props.acceptOffer} state={this.props.state}/>
                   :
                   null
                   }

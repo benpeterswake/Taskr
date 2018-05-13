@@ -31,6 +31,9 @@ class BrowseTasks extends React.Component{
                         }
                         return(
                           <div class="col-lg-12 ">
+                          {
+                            post.accepted.length > 0? null:
+                            <span>
                             {
                               post.user_id === this.props.state.id?null:
                               <span>
@@ -91,6 +94,9 @@ class BrowseTasks extends React.Component{
                               }
                               </span>
                             }
+                            </span>
+                          }
+
                           </div>
                         )
                       })

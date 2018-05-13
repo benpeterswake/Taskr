@@ -19,6 +19,32 @@ router.get('/' , (req, res) => {
   }
 })
 
+router.put('/accept', (req, res) => {
+  if(req.session.currentUser){
+    let offerObj = {user_id: req.body.user_id, name:  req.body.name, budget: req.body.budget, total: req.body.total}
+    Post.findByIdAndUpdate(req.body.id, { $set: { offers : [] } }, {multi:true} ,(err, updatedPost) => {
+      if(err){
+        console.log(err);
+        res.json({error: "error"})
+      }else{
+        Post.findByIdAndUpdate(req.body.id, { $push: { accepted: offerObj } }, {new:true}, (err, acceptedPost) => {
+          if(err){
+            console.log(err);
+            res.json({error: "error"})
+          }else{
+            console.log(acceptedPost);
+            res.json({post: acceptedPost, success: "offer accepted!"})
+          }
+        })
+      }
+    })
+  }else{
+    res.json({
+      auth: 'logged out'
+    })
+  }
+})
+
 router.put('/', (req, res) => {
   if(req.session.currentUser){
     let offerObj = {user_id: req.session.currentUser._id, name:  req.body.name, budget: req.body.budget, total: req.body.total}
@@ -38,5 +64,7 @@ router.put('/', (req, res) => {
     })
   }
 })
+
+
 
 module.exports = router;

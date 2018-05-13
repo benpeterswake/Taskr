@@ -67,7 +67,7 @@ class App extends React.Component{
       if(data.success){
         let num = 0;
         for(let i=0; i<data.posts.length; i++){
-            num += data.posts[i].offers.length
+          num += data.posts[i].offers.length
         }
         this.setState({
           posts: data.posts,
@@ -279,13 +279,14 @@ class App extends React.Component{
     }).catch(error => console.log(error))
   }
 
-  toggleState(st1, st2, st3, st4, st5){
+  toggleState(st1, st2, st3, st4, st5, st6){
     this.setState({
       [st1]: true,
       [st2]: false,
       [st3]: false,
       [st4]: false,
-      [st5]: false
+      [st5]: false,
+      [st6]: false
     })
   }
 
@@ -319,7 +320,6 @@ class App extends React.Component{
               :
               <Dashboard changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
             }
-
           </div>
           :
           <div>
@@ -331,7 +331,7 @@ class App extends React.Component{
               :
               <section>
                 <Header />
-                <Services  goToTop={this.goToTop} toggleState={this.toggleState}/>
+                <Services goToTop={this.goToTop} toggleState={this.toggleState}/>
                 <About />
                 <Info />
                 <Recent goToTop={this.goToTop} toggleState={this.toggleState} state={this.state}/>
@@ -340,8 +340,6 @@ class App extends React.Component{
                 <Footer />
               </section>
             }
-
-
           </div>
         }
     </section>

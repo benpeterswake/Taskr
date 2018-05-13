@@ -101,6 +101,10 @@ nav .nav-item .btn{
 .inner{
   padding-top: 100px;
 }
+#link{
+  position: absolute;
+  margin-top: -50px
+}
 #services .card:hover{
  cursor: pointer;
  border: 1px solid #D85450;
@@ -190,6 +194,9 @@ footer li{
   list-style: none;
   line-height: 30px;
   color:#9FBCB6;
+}
+footer li:hover{
+  text-decoration: underline;
 }
 
 @media (min-width: 992px) {

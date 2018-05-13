@@ -81,6 +81,7 @@ class MyWork extends React.Component{
             </div>
           }
           </div>
+          <hr/>
 
           <h6 class="mt-5 text-center">Accepted Offers</h6>
           <div class="row">

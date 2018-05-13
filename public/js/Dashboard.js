@@ -54,7 +54,18 @@ class MyWork extends React.Component{
       <div class="inner">
         <h5>My Work</h5>
         <hr/>
-          <h6 class="text-center">Offers Made</h6>
+        <span>
+            {
+             this.props.state.offerSuccess?
+             <div class="alert alert-success" role="alert">
+               Offer successfull made!
+               <button type="button" class="close" onClick={() => this.props.toggleState(null,null,"createSuccess")}>
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>:null
+             }
+          </span>
+          <h6 class="mt-4 text-center">Offers Made</h6>
           <div class="row">
           {
             this.props.state.offers.length > 0?
@@ -83,29 +94,30 @@ class MyWork extends React.Component{
           </div>
           <hr/>
 
-          <h6 class="mt-5 text-center">Accepted Offers</h6>
+          <h6 class="mt-4 text-center">Accepted Offers</h6>
           <div class="row">
           {
-            this.props.state.accepted > 0?
-            this.props.state.offers.map((offer, index) => {
+            this.props.state.accepted.length > 0?
+            this.props.state.accepted.map((accepted, index) => {
               return (
-                <div class="col-lg-6 mt-3 ">
+                <div class="col-lg-6 mt-3">
                   <div class="card text-white bg-secondary ">
                     <div class="card-body">
                       <span class="badge badge-success float-right">Accepted</span>
-                      <span class="card-text">Task: {offer.title}</span><br/>
-                      <span class="card-text">User: {offer.name}</span><br/>
-                      <span class="card-text">budget: ${offer.budget}{offer.total?null:'/hr'}</span><br/>
-                      <span class="card-text">Due date: {offer.date}</span>
+                      <span class="card-text">Task: {accepted.title}</span><br/>
+                      <span class="card-text">User: {accepted.name}</span><br/>
+                      <span class="card-text">budget: ${accepted.budget}{accepted.total?null:'/hr'}</span><br/>
+                      <span class="card-text">Due date: {accepted.date}</span>
                     </div>
                   </div>
                 </div>
+
               )
             })
             :
             <div class="col-lg-8 text-center mx-auto">
                 <i class="fas fa-bullhorn mt-4"></i>
-               <h5 class="mt-4 mb-4 small">You have no accepted offers...</h5>
+               <h5 class="mt-4 mb-4 small">You have no new offers on tasks...</h5>
             </div>
           }
           </div>
@@ -113,15 +125,19 @@ class MyWork extends React.Component{
     )
   }
 }
-
+// <div class="col-lg-8 text-center mx-auto">
+// <i class="fas fa-bullhorn mt-4"></i>
+// <h5 class="mt-4 mb-4 small">You have no accepted offers...</h5>
+// </div>
 class Dashboard extends React.Component{
   constructor(props){
     super(props)
 
   }
   componentDidMount(){
-    this.props.getPost()
     this.props.getOffers()
+    this.props.getAccepted()
+    this.props.getPost()
   }
 
   render(){
@@ -137,7 +153,7 @@ class Dashboard extends React.Component{
                   <p class="text-muted">{this.props.state.name}</p>
                   <li id="dashboard-btn" class="list-group-item  list-group-item-danger mt-5" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork","notifications"); this.props.changeActive("dashboard-btn")}}>Dashboard</li>
                   <li id="myTasks" class="list-group-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork","notifications"); this.props.changeActive("myTasks")}}>My Tasks</li>
-                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks","notifications"); this.props.changeActive("myWork")}}>My Work</li>
+                  <li id="myWork" class="list-group-item" onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks","notifications"); this.props.changeActive("myWork")}}>My Work <span class="badge badge-pill badge-success"> {this.props.state.workSum}</span></li>
                   <li id="notifications" class="list-group-item" onClick={(event) => {this.props.toggleState("notifications","myWork", "dashboard", "myTasks"); this.props.changeActive("notifications")}}>Notifications <span class="badge badge-pill badge-warning">{this.props.state.notificationsNum}</span></li>
                   <li class="list-group-item text-danger" onClick={this.props.logOut}>Logout</li>
                 </div>
@@ -275,7 +291,7 @@ class Dashboard extends React.Component{
 
                   {
                   this.props.state.myTasks?
-                    <MyTasks toggleState={this.props.toggleState} completePost={this.props.completePost} deletePost={this.props.deletePost} state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
+                    <MyTasks changeActive={this.props.changeActive} toggleState={this.props.toggleState} completePost={this.props.completePost} deletePost={this.props.deletePost} state={this.props.state} editPost={this.props.editPost} toggleEdit={this.props.toggleEdit}/>
                   :
                   null
                   }

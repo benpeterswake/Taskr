@@ -11,6 +11,7 @@ class App extends React.Component{
       browseTasks: false,
       notifications: false,
       posts: [],
+      accepted: [],
       recentPosts:[],
       allPosts: [],
       post: {},
@@ -18,6 +19,7 @@ class App extends React.Component{
       notifications: null,
       editPost: null,
       completedSum: 0,
+      workSum: 0,
       createSuccess: false,
       offerSuccess: false
     }
@@ -36,6 +38,7 @@ class App extends React.Component{
     this.createOffer = this.createOffer.bind(this)
     this.getOffers = this.getOffers.bind(this)
     this.acceptOffer = this.acceptOffer.bind(this)
+    this.getAccepted = this.getAccepted.bind(this)
   }
 
   componentDidMount(){
@@ -73,7 +76,7 @@ class App extends React.Component{
         this.setState({
           posts: data.posts,
           completedSum: 0,
-          notificationsNum: num
+          notificationsNum: num,
         })
       }else{
         console.log('no posts');
@@ -204,7 +207,12 @@ class App extends React.Component{
       if(data.success){
         this.setState({
           post: data.post,
-          offerSuccess: index
+          offerSuccess: true,
+          notifications: false,
+          dashboard: false,
+          myTasks: false,
+          myWork: true,
+          browseTasks: false
         })
         this.getPost()
       }else{
@@ -222,9 +230,29 @@ class App extends React.Component{
       if(data.success){
         this.setState({
           offers: data.offers,
-          offerSuccess: true,
         })
         console.log(this.state);
+      }else{
+        console.log('no posts');
+      }
+    }).catch(error => console.log(error))
+  }
+
+  getAccepted(){
+    fetch('/offer/accept', {
+      credentials: "same-origin"
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+      if(data.success){
+        let num = 0;
+        for(let i=0; i<data.post.length; i++){
+          num += data.post[i].accepted.length
+        }
+        this.setState({
+          accepted: data.post,
+          workSum: num
+        })
       }else{
         console.log('no posts');
       }
@@ -347,7 +375,7 @@ class App extends React.Component{
               this.state.browseTasks?
               <BrowseTasks getAllPosts={this.getAllPosts} toggleState={this.toggleState} createOffer={this.createOffer} state={this.state}/>
               :
-              <Dashboard acceptOffer={this.acceptOffer} changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+              <Dashboard getAccepted={this.getAccepted} acceptOffer={this.acceptOffer} changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
             }
           </div>
           :

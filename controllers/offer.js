@@ -19,6 +19,24 @@ router.get('/' , (req, res) => {
   }
 })
 
+router.get('/accept', (req, res) => {
+  if(req.session.currentUser){
+    Post.find({accepted: { $elemMatch: { user_id:req.session.currentUser } } },(err, posts) => {
+      if(err){
+        console.log(err);
+        res.json({error: "error"})
+      }else{
+      console.log(posts);
+      res.json({post: posts, success: "found accepted!"})
+      }
+    })
+  }else{
+    res.json({
+      auth: 'logged out'
+    })
+  }
+})
+
 router.put('/accept', (req, res) => {
   if(req.session.currentUser){
     let offerObj = {user_id: req.body.user_id, name:  req.body.name, budget: req.body.budget, total: req.body.total}

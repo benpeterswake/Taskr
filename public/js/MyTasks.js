@@ -57,11 +57,11 @@ class MyTasks extends React.Component{
                         <h4 class="float-right">${post.budget}{post.hourly?'/hr':null}
                         <br/>
                         <span class="small">Offers:
-                              {
-                                post.offers.length>0?
-                                 " " + post.offers.length
-                                : ' None'
-                              }
+                          {
+                            post.offers.length>0?
+                             <a> <span class="badge badge-pill badge-danger" onClick={() => {this.props.toggleState("notifications","myTasks"); this.props.changeActive("notifications")}}> view offers!</span> </a>
+                            : ' None'
+                          }
                         </span><br/>
                         <span class="small">People required: {post.people}</span>
                         </h4>

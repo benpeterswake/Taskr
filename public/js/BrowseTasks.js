@@ -73,9 +73,6 @@ class BrowseTasks extends React.Component{
                                   {
                                     this.props.state.loggedIn?
                                     <span>
-                                    {
-                                      this.props.state.offerSuccess === index?<span class="small">You have already applied to this posting</span> :
-                                      <span>
                                       {
                                         found?
                                         <span class="small">You have already applied to this posting</span>
@@ -83,8 +80,6 @@ class BrowseTasks extends React.Component{
                                         <a href="#" onClick={() => this.handleClick(post, index)} class="card-link">Submit Offer</a>
                                       }
                                       </span>
-                                    }
-                                    </span>
                                     :
                                     <a  href="#" class="card-link" data-toggle="modal" data-target="#loginModal">Submit Offer</a>
                                   }

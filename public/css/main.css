@@ -211,6 +211,40 @@ footer li:hover{
   .navbar-collapse{
     padding-left:0px;
   }
+  .right-col{
+    background: white;
+    text-align: left;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .right-col-browse{
+    background: white;
+    text-align: left;
+    height: 95%;
+    overflow: visible;
+  }
+  #dashboard .full{
+    height:100%;
+  }
+  #dashboard{
+    position: absolute;
+    top:0;
+    background-color: #e3e9ed;
+    width: 100%;
+    overflow-y: visible;
+  }
+
+  #browse{
+    position: absolute;
+    top:0;
+    background-color: #e3e9ed;
+    width: 100%;
+    overflow-y: visible;
+  }
+  #map{
+    display: none;
+  }
   .vl{
     border:0.05em solid lightgrey;
     position: fixed;

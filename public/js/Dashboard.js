@@ -23,7 +23,7 @@ class Notifications extends React.Component{
                             <p class="card-text mt-2">{offer.name} made an offer on <strong>{post.title}</strong></p>
                             <h5 class="card-text">${offer.budget}{offer.total?null:'/hr'}</h5>
                             <p><button onClick={() => this.props.acceptOffer(offer, post._id)} class="btn btn-success btn-sm">Accept Offer</button></p>
-                            <p><button class="btn btn-danger btn-sm">Decline Offer</button></p>
+                            <p><button onClick={() => this.props.declineOffer(offer, post._id)} class="btn btn-danger btn-sm">Decline Offer</button></p>
                           </div>
                         </div>
                       </div>
@@ -111,7 +111,6 @@ class MyWork extends React.Component{
                     </div>
                   </div>
                 </div>
-
               )
             })
             :
@@ -303,7 +302,7 @@ class Dashboard extends React.Component{
                   }
                   {
                   this.props.state.notifications?
-                    <Notifications acceptOffer={this.props.acceptOffer} state={this.props.state}/>
+                    <Notifications declineOffer={this.props.declineOffer} acceptOffer={this.props.acceptOffer} state={this.props.state}/>
                   :
                   null
                   }

@@ -63,6 +63,24 @@ router.put('/accept', (req, res) => {
   }
 })
 
+router.put('/decline', (req, res) => {
+  if(req.session.currentUser){
+    Post.findByIdAndUpdate(req.body.id, { $pull: { offers : { user_id: req.body.user_id} } }, {multi:true} ,(err, post) => {
+      if(err){
+        console.log(err);
+        res.json({error: "error"})
+      }else{
+        console.log(post);
+        res.json({post: post, success: "offer decline successfull!"})
+      }
+    })
+  }else{
+    res.json({
+      auth: 'logged out'
+    })
+  }
+})
+
 router.put('/', (req, res) => {
   if(req.session.currentUser){
     let offerObj = {user_id: req.session.currentUser._id, name:  req.body.name, budget: req.body.budget, total: req.body.total}

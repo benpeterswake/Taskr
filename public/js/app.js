@@ -40,6 +40,7 @@ class App extends React.Component{
     this.getOffers = this.getOffers.bind(this)
     this.acceptOffer = this.acceptOffer.bind(this)
     this.getAccepted = this.getAccepted.bind(this)
+    this.declineOffer = this.declineOffer.bind(this)
   }
 
   componentDidMount(){
@@ -277,13 +278,40 @@ class App extends React.Component{
       .then(data => {
       if(data.success){
         this.setState({
-          post: data.post,
           notifications: false,
           dashboard: false,
           myTasks: true,
           myWork: false,
           browseTasks: false
         })
+        this.getPost()
+      }else{
+        console.log('no posts');
+      }
+    }).catch(error => console.log(error))
+  }
+
+  declineOffer(post, id){
+    post.id = id
+    fetch('/offer/decline', {
+      credentials: "same-origin",
+      method: 'PUT',
+      body: JSON.stringify(post),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(data => {
+      if(data.success){
+        this.setState({
+          notifications: false,
+          dashboard: false,
+          myTasks: true,
+          myWork: false,
+          browseTasks: false
+        })
+        this.changeActive('myTasks')
         this.getPost()
       }else{
         console.log('no posts');
@@ -381,7 +409,7 @@ class App extends React.Component{
               this.state.browseTasks?
               <BrowseTasks getAllPosts={this.getAllPosts} toggleState={this.toggleState} createOffer={this.createOffer} state={this.state}/>
               :
-              <Dashboard getAccepted={this.getAccepted} acceptOffer={this.acceptOffer} changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
+              <Dashboard declineOffer={this.declineOffer} getAccepted={this.getAccepted} acceptOffer={this.acceptOffer} changeActive={this.changeActive} getOffers={this.getOffers} toggleState={this.toggleState} goToTop={this.goToTop} completePost={this.completePost} deletePost={this.deletePost} editPost={this.editPost} toggleEdit={this.toggleEdit} logOut={this.logOut} getPost={this.getPost} toggleState={this.toggleState} state={this.state} />
             }
           </div>
           :

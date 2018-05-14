@@ -70,11 +70,11 @@ class Nav extends React.Component{
                       <i class="fas fa-user"></i> {this.props.name}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item">Dashboard</a>
-                      <a class="dropdown-item">My Tasks</a>
-                      <a class="dropdown-item">My Offers</a>
-                      <a class="dropdown-item">Notifications</a>
-                      <a class="dropdown-item">Browse Tasks</a>
+                      <a class="dropdown-item" onClick={() => {this.props.toggleState("dashboard", "myTasks", "myWork","notifications","browseTasks"); this.props.changeActive("dashboard-btn")}}>Dashboard</a>
+                      <a class="dropdown-item" onClick={() => {this.props.toggleState("myTasks", "dashboard","myWork","notifications","browseTasks"); this.props.changeActive("myTasks")}}>My Tasks</a>
+                      <a class="dropdown-item"  onClick={(event) => {this.props.toggleState("myWork", "dashboard", "myTasks","notifications","browseTasks"); this.props.changeActive("myWork")}}>My Offers</a>
+                      <a class="dropdown-item" onClick={(event) => {this.props.toggleState("notifications","myWork", "dashboard", "myTasks","browseTasks"); this.props.changeActive("notifications")}}>Notifications</a>
+                      <a class="dropdown-item" onClick={() =>{ this.props.toggleState('browseTasks', 'myTasks', 'dashboard','notifications'); this.props.goToTop()}}>Browse Tasks</a>
                       <a class="dropdown-item"><button class="btn btn-danger btn-block" onClick={this.props.logOut}>Logout</button></a>
                     </div>
                   </div>
